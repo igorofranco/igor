@@ -6,44 +6,26 @@ use App\Actions\Jetstream\DeleteUser;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
 
-class JetstreamServiceProvider extends ServiceProvider
-{
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
+class JetstreamServiceProvider extends ServiceProvider{
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->configurePermissions();
+  public function register():void{
+    //
+  }
 
-        Jetstream::deleteUsersUsing(DeleteUser::class);
-    }
+  public function boot():void{
+    $this->configurePermissions();
 
-    /**
-     * Configure the permissions that are available within the application.
-     *
-     * @return void
-     */
-    protected function configurePermissions()
-    {
-        Jetstream::defaultApiTokenPermissions(['read']);
+    Jetstream::deleteUsersUsing(DeleteUser::class);
+  }
 
-        Jetstream::permissions([
-            'create',
-            'read',
-            'update',
-            'delete',
-        ]);
-    }
+  protected function configurePermissions():void{
+    Jetstream::defaultApiTokenPermissions(['read']);
+
+    Jetstream::permissions([
+      'create',
+      'read',
+      'update',
+      'delete',
+    ]);
+  }
 }
